@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
+import 'package:flutter/rendering.dart';
+import './random_words.dart';
+import './container.dart';
+import './column_and_row.dart';
 
 void main() {
+  debugPaintSizeEnabled = true;
   runApp(const MyApp());
 }
 
@@ -24,7 +30,12 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const RandomWords(),
+      home: const ContainerSample(),
+      // home: const RowSample(),
+      // home: const ColumnSample(),
+      // home: const RowColumnSample(),
     );
   }
 }
@@ -49,6 +60,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _text = WordPair.random().asPascalCase;
 
   void _incrementCounter() {
     setState(() {
@@ -58,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      _text = WordPair.random().asPascalCase;
     });
   }
 
@@ -102,6 +115,10 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text(
+              _text,
+              style: Theme.of(context).textTheme.headline4,
+            )
           ],
         ),
       ),
@@ -113,3 +130,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
