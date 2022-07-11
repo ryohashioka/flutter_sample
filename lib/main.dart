@@ -6,6 +6,7 @@ import './container.dart';
 import './column_and_row.dart';
 import './stack.dart';
 import './card.dart';
+import './list.dart';
 
 void main() {
   debugPaintSizeEnabled = true;
@@ -41,7 +42,13 @@ class MyApp extends StatelessWidget {
       // home: const StackSample(),
       // home: const StackPositionedSample(),
       // home: const StackAlignmentSample(),
-      home: const CardSample(),
+      // home: const CardSample(),
+      // home: const ListSample(),
+      // home: const ListSample2(),
+      // home: const ListTileSample(),
+      // home: const ListBuilderSample(),
+      // home: const ListSeparatedSample(),
+      home: const ListScrollDirection(),
     );
   }
 }
