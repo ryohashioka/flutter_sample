@@ -5,6 +5,7 @@ import './random_words.dart';
 import './container.dart';
 import './column_and_row.dart';
 import './stack.dart';
+import './card.dart';
 
 void main() {
   debugPaintSizeEnabled = true;
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
       // home: const RowColumnSample(),
       // home: const StackSample(),
       // home: const StackPositionedSample(),
-      home: const StackAlignmentSample(),
+      // home: const StackAlignmentSample(),
+      home: const CardSample(),
     );
   }
 }
