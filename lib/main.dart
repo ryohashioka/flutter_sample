@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import './random_words.dart';
 import './container.dart';
 import './column_and_row.dart';
+import './stack.dart';
 
 void main() {
   debugPaintSizeEnabled = true;
@@ -32,10 +33,13 @@ class MyApp extends StatelessWidget {
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: const RandomWords(),
-      home: const ContainerSample(),
+      // home: const ContainerSample(),
       // home: const RowSample(),
       // home: const ColumnSample(),
       // home: const RowColumnSample(),
+      // home: const StackSample(),
+      // home: const StackPositionedSample(),
+      home: const StackAlignmentSample(),
     );
   }
 }
