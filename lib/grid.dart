@@ -27,7 +27,9 @@ class GridSample extends StatelessWidget {
       ),
       body: GridView.count(
           crossAxisCount: 2,
-          childAspectRatio: 0.7,
+          // mainAxisSpacing: 4,
+          // crossAxisSpacing: 4,
+          // childAspectRatio: 0.7,
           children: list
       )
     );

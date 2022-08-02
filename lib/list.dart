@@ -25,7 +25,7 @@ class ListSample2 extends StatelessWidget {
       child:Container(
           padding: EdgeInsets.all(8.0),
           decoration: new BoxDecoration(
-              border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))
+              border: new Border(bottom: BorderSide(width: 1.0, color: Colors.grey)),
           ),
           child: Row(
             children: <Widget>[
