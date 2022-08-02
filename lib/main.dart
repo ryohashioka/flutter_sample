@@ -20,48 +20,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: const RowSample(),
-      // home: const ColumnSample(),
-      // home: const RowColumnSample(),
-      // home: const StackSample(),
-      // home: const StackPositionedSample(),
-      // home: const StackAlignmentSample(),
-      // home: const CardSample(),
-      // home: const ListSample(),
-      // home: const ListSample2(),
-      // home: const ListTileSample(),
-      // home: const ListBuilderSample(),
-      // home: const ListSeparatedSample(),
-      // home: const ListScrollDirection(),
-      // home: const GridSample(),
-      // home: const GridExtentSample(),
-      // home: const GridBuilderSample(),
-      // home: const ButtonSample(),
-      // home: const PopupMenuButtonSample(),
-      // home: const DropdownButtonSample(),
-      // home: const CheckBoxSample(),
-      // home: const RadioButtonSample(),
-      // home: const SwitchSample(),
-      // home: const DatePickerSample(),
-      // home: const TextFieldSample(),
     );
   }
 }
@@ -87,24 +53,83 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextButton(
-              onPressed: () => goPage( const RandomWords()),
+      body: ListView(
+        children: <Widget>[
+          TextButton(
+              onPressed: () => goPage( const RandomWords() ),
               child: const Text('無限スクロール')
-            ),
-            TextButton(
-                onPressed: () => goPage( const ContainerSample()),
-                child: const Text('Container サンプル')
-            ),
-          ],
-        ),
+          ),
+          TextButton(
+              onPressed: () => goPage( const ContainerSample() ),
+              child: const Text('Container サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const RowColumnSample() ),
+              child: const Text('Row x Column サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const StackAlignmentSample() ),
+              child: const Text('Stack サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const CardSample() ),
+              child: const Text('Card サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const ListTileSample() ),
+              child: const Text('ListTile サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const ListBuilderSample() ),
+              child: const Text('ListBuilder サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const ListScrollDirection() ),
+              child: const Text('ListScroll サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const GridExtentSample() ),
+              child: const Text('GridExtent サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const GridBuilderSample() ),
+              child: const Text('GridBuilder サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const ButtonSample() ),
+              child: const Text('Button サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const PopupMenuButtonSample() ),
+              child: const Text('PopupMenuButton サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const DropdownButtonSample() ),
+              child: const Text('DropdownButton サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const CheckBoxSample() ),
+              child: const Text('CheckBox サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const RadioButtonSample() ),
+              child: const Text('RadioButton サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const SwitchSample() ),
+              child: const Text('Switch サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const DatePickerSample() ),
+              child: const Text('DatePicker サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const DatePickerSample() ),
+              child: const Text('TextField サンプル')
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => goPage( const SubPage() ),
