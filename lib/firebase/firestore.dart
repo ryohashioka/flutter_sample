@@ -12,12 +12,15 @@ class FirestoreSample extends StatefulWidget {
 
 class _FirestoreSampleState extends State<FirestoreSample> {
 
+  bool isFilter = false;
+
   void addRandomUser() {
     var db = FirebaseFirestore.instance;
     // Create a new user with a first and last name
     final user = <String, dynamic>{
       "name": WordPair.random().asLowerCase,
-      "born": 1950 + Random().nextInt(70)
+      "born": 1950 + Random().nextInt(70),
+      "gender": Random().nextInt(2) == 0 ? 'male' : 'female'
     };
 
     // Add a new document with a generated ID
@@ -30,12 +33,30 @@ class _FirestoreSampleState extends State<FirestoreSample> {
 
   @override
   Widget build(BuildContext context) {
+    IconData filterIcon = Icons.filter_alt;
+    dynamic query = FirebaseFirestore.instance.collection('users');
+    if(isFilter) {
+      filterIcon = Icons.filter_alt_off;
+      query = query
+          .where("born", isGreaterThan: 1992)
+          .where("gender", isEqualTo: "female");
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text("Firestore サンプル"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(filterIcon),
+            onPressed: () {
+              setState(() {
+                isFilter = !isFilter;
+              });
+            },
+          )
+        ],
       ),
       body: FutureBuilder(
-        future: FirebaseFirestore.instance.collection('users').get(),
+        future: query.get(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return const Text("Something went wrong");
@@ -46,7 +67,7 @@ class _FirestoreSampleState extends State<FirestoreSample> {
           if (snapshot.hasData) {
             final List<DocumentSnapshot> documents = snapshot.data!.docs;
             return ListView.separated(
-              physics: const AlwaysScrollableScrollPhysics(),
+              // physics: const AlwaysScrollableScrollPhysics(),
               itemCount: documents.length,
               separatorBuilder: (BuildContext context, int index) => Divider(color: Colors.black,),
               itemBuilder: (BuildContext context, int index) {
