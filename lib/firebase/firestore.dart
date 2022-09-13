@@ -38,8 +38,10 @@ class _FirestoreSampleState extends State<FirestoreSample> {
     if(isFilter) {
       filterIcon = Icons.filter_alt_off;
       query = query
+          .where("born", isLessThan: 2010)
           .where("born", isGreaterThan: 1992)
           .where("gender", isEqualTo: "female");
+      query = query.where("name", isEqualTo: "artbit");
     }
     return Scaffold(
       appBar: AppBar(

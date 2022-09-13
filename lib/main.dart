@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter_sample/firebase/authentication.dart';
 import 'package:flutter_sample/firebase/firestore.dart';
 // import 'package:flutter/rendering.dart';
 import './random_words.dart';
@@ -142,6 +143,10 @@ class _MyHomePageState extends State<MyHomePage> {
           TextButton(
               onPressed: () => goPage( const FirestoreSample() ),
               child: const Text('Firestore サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const FbAuth() ),
+              child: const Text('Firebase 認証サンプル')
           ),
         ],
       ),
