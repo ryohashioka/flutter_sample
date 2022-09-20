@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:flutter_sample/firebase/authentication.dart';
 import 'package:flutter_sample/firebase/firestore.dart';
 // import 'package:flutter/rendering.dart';
 import './random_words.dart';
@@ -14,6 +13,7 @@ import './buttons.dart';
 import './text_field.dart';
 import './sub_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase/authentication.dart';
 import 'firebase_options.dart';
 
 // void main() {

@@ -12,10 +12,35 @@ class _PhoneAuthState extends State<PhoneAuth> {
 
   final _formKey = GlobalKey<FormState>();
   String _phoneNumber = "";
-  String? _smsCode;
+  final _smsCodeController = TextEditingController();
+
+  Future<String?> inputSmsCodeDialog() {
+    return showDialog<String>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('SMS コード'),
+          content: TextField(
+            controller: _smsCodeController,
+            keyboardType: TextInputType.number,
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, null),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, _smsCodeController.text),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   void create(BuildContext context) async {
-
     FirebaseAuth auth = FirebaseAuth.instance;
     await auth.verifyPhoneNumber(
       phoneNumber: '+81' + _phoneNumber,
@@ -30,17 +55,21 @@ class _PhoneAuthState extends State<PhoneAuth> {
         print("Failed");
       },
       codeSent: (String verificationId, int? resendToken) async {
-        // SMS にコードを送信した後に呼ばれる
+        // NOTE: SMS にコードを送信した後に呼ばれる
 
-        // Update the UI - wait for the user to enter the SMS code
-        String smsCode = '111222';
+        var res = await inputSmsCodeDialog();
+        if(res != null) {
+          // Update the UI - wait for the user to enter the SMS code
+          String smsCode = res;
 
-        // Create a PhoneAuthCredential with the code
-        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+          // Create a PhoneAuthCredential with the code
+          PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
 
-        // Sign the user in (or link) with the credential
-        await auth.signInWithCredential(credential);
-        Navigator.pop(context);
+          // Sign the user in (or link) with the credential
+          await auth.signInWithCredential(credential);
+          Navigator.pop(context);
+        }
+
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // TODO: タイムアウト処理
@@ -93,5 +122,4 @@ class _PhoneAuthState extends State<PhoneAuth> {
       ),
     );
   }
-
 }
