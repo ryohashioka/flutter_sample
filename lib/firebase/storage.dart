@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class FbStorage extends StatefulWidget {
   const FbStorage({super.key});
@@ -75,10 +76,15 @@ class _FbStorageState extends State<FbStorage> {
           )
         ],
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        children: images(),
+      body: CarouselSlider(
+        options: CarouselOptions(height: 400.0),
+        items: images(),
       )
+      
+      // GridView.count(
+      //   crossAxisCount: 2,
+      //   children: images(),
+      // )
     );
   }
 }
