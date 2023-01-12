@@ -14,6 +14,7 @@ import './text_field.dart';
 import './sub_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase/authentication.dart';
+import 'firebase/storage.dart';
 import 'firebase_options.dart';
 
 // void main() {
@@ -147,6 +148,10 @@ class _MyHomePageState extends State<MyHomePage> {
           TextButton(
               onPressed: () => goPage( const FbAuth() ),
               child: const Text('Firebase 認証サンプル')
+          ),
+          TextButton(
+              onPressed: () => goPage( const FbStorage() ),
+              child: const Text('Firebase Storage サンプル')
           ),
         ],
       ),
