@@ -11,6 +11,39 @@ class FbStorage extends StatefulWidget {
 }
 
 class _FbStorageState extends State<FbStorage> {
+
+  List<Reference> imageRefs = [];
+
+  void loadImages() async {
+    final storageRef = FirebaseStorage.instance.ref().child("images/");
+    final listResult = await storageRef.listAll();
+    setState(() {
+      imageRefs = listResult.items;
+    });
+  }
+  
+  List<Widget> images() {
+    return imageRefs.map((ref) {
+      return FutureBuilder(
+        future: ref.getDownloadURL(),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if(snapshot.hasData) {
+            return Image.network(snapshot.data!);
+          } else {
+            return const Text("loading...");
+          }
+        },
+      );
+    }).toList();
+  }
+
+  @override
+  void initState() {
+    loadImages();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,18 +64,21 @@ class _FbStorageState extends State<FbStorage> {
               try {
                 String imageUrl = '';
                 final task = await storage.ref('images/${image.name}').putFile(File(image.path));
-                imageUrl = await task.ref.getDownloadURL();
-                // cloud storeに保存されたURLが表示されます
-                print(imageUrl);
                 // firestoreに保存する処理
               } on FirebaseException  catch (e) {
                 // エラー処理
               }
+
+              loadImages();
             },
             icon: const Icon(Icons.add),
           )
         ],
       ),
+      body: GridView.count(
+        crossAxisCount: 2,
+        children: images(),
+      )
     );
   }
 }
